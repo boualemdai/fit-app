@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fit-app</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <section class="display-section">
+      <img src="./logo.png" alt="logo" />
+
+      <form class="hidden">
+        <label for="type">Type</label>
+        <select id="type">
+          <option value="Running">Running</option>
+          <option value="Cycling">Cycling</option>
+        </select>
+        <label for="distance">Distance</label>
+        <input type="text" placeholder="km" id="distance" />
+        <label for="duration">Duration</label>
+        <input type="text" placeholder="min" id="duration" />
+        <label for="cadence">Cadence</label>
+        <input type="text" placeholder="step/min" id="cadence" />
+      </form>
+      
+    </section>
+    <section class="map-section" id="map"></section>
+
+    <p id="demo"></p>
+  </body>
+</html>

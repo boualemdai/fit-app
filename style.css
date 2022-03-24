@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+:root {
+  --color-1: #2d3439;
+  --color-2: rgb(229, 230, 230);
+  --color-3: #00c56a;
+  --color-4: #ffb545;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background-color: var(--color-2);
+}
+
+.display-section {
+  width: 650px;
+  height: 80vh;
+  background-color: var(--color-1);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  overflow: auto;
+}
+img {
+  display: block;
+  width: 40%;
+  margin: 0 auto 0.5rem;
+}
+form,
+.programme {
+  display: grid;
+  grid-template-areas:
+    "lt it ld id"
+    "ldur idur lc ic";
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  background-color: rgb(229, 230, 230, 0.15);
+  border-radius: 10px;
+}
+
+label {
+  font-size:01rem;
+  height: 2rem;
+  line-height: 2rem;
+  font-weight: 100;
+  color: white;
+}
+input,
+select {
+  font-size: 1.2rem;
+  height: 2rem;
+  width: 5rem;
+  border: none;
+  border-radius: 5px;
+}
+.programme {
+  flex-grow: 1;
+  grid-template-areas:
+    " h h h h"
+    " t d dur c";
+  column-gap: 0.2rem;
+  row-gap: 0.5rem;
+  color: var(--color-2);
+}
+
+.programme :nth-child(1) {
+  grid-area: h;
+  font-size: 1rem;
+  font-weight: 400;
+}
+.programme p {
+  font-size: 1rem;
+}
+.programme :nth-child(2) {
+  grid-area: t;
+}
+.programme :nth-child(3) {
+  grid-area: d;
+}
+.programme :nth-child(4) {
+  grid-area: dur;
+}
+.programme :nth-child(5) {
+  grid-area: c;
+}
+
+.hidden {
+  display: none;
+}
+.map-section {
+  width: 100%;
+ 
+  background-color: var(--color-3);
+}
+#map{
+  height: 80vh;
+}
+.foo {
+  display: flex;
+}
+.work-run{
+  transform: translateX(50%);
+  margin-top: 1rem;
+  width: 1rem;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: var(--color-3)
+}
+.work-cycle{
+  transform: translateX(50%);
+  margin-top: 1rem;
+  width: 1rem;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: var(--color-4)
+}
+
