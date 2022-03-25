@@ -6,31 +6,11 @@ const cadence = document.getElementById("cadence");
 const form = document.querySelector("form");
 const mapSection = document.querySelector(".map-section");
 const inputForCadence = document.querySelector("[for = 'cadence']");
-const  x = document.getElementById("demo");
+const x = document.getElementById("demo");
 let lat;
 let lng;
 
-
-
-function getLocation(){
-navigator.geolocation.getCurrentPosition((position)=>{
-  console.log(position);
- localStorage.setItem("lats",`${position.coords.latitude}`);
- localStorage.setItem("lngs",`${position.coords.longitude}`);
- 
-},()=>{
-  console.log("not possibal");
-})
-}
-getLocation()
-
-
-const latLocal=+localStorage.getItem("lats")||51
-const lngLocal=+localStorage.getItem("lngs")||-0.6
-  
-
-
-var map = L.map("map").setView([latLocal, lngLocal], 13);
+var map = L.map("map");
 L.tileLayer(
   "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
   {
@@ -44,6 +24,77 @@ L.tileLayer(
       "pk.eyJ1IjoiYm91YWxlbWRhaSIsImEiOiJjbDEzZmN5djkwMGhkM2pzNGl5eG91dXhzIn0.2NiVVMZ0ck2RlAaGM4SguQ",
   }
 ).addTo(map);
+
+function getLocation() {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      localStorage.setItem("lats", position.coords.latitude);
+      localStorage.setItem("lngs", position.coords.longitude);
+      map.setView([position.coords.latitude, position.coords.longitude], 13);
+    },
+    () => {
+      console.log("default coords");
+      map.setView([51, -0.6], 13);
+    }
+  );
+}
+
+if (localStorage.getItem("lats") && localStorage.getItem("lngs")) {
+  map.setView(
+    [+localStorage.getItem("lats"), +localStorage.getItem("lngs")],
+    13
+  );
+} else {
+  getLocation();
+}
+if (JSON.parse(localStorage.getItem("arr"))) {
+  var arr = JSON.parse(localStorage.getItem("arr"));
+  for (let element of arr) {
+    const html = `
+        <div class="foo">
+          <div class=${
+            element.type === "Running" ? "work-run" : "work-cycle"
+          }></div>
+           <div class="programme">
+            <h3>${element.type} on ${new Date().toLocaleString(
+      navigator.language,
+      {
+        month: "long",
+        day: "2-digit",
+      }
+    )}</h3>
+            <p> <span>${element.type === "Running" ? "🏃" : "🚴‍♀️"} ${
+      element.distance
+    }</span>  km</p>
+            <p> <span>⌛ ${element.duration}</span>  min</p>
+            <p> <span>⚡ ${
+              element.duration / element.distance
+            }</span>  min/km</p>
+            <p> <span>${element.type === "Running" ? "👣" : "🏔️"} ${
+      element.cadence
+    }</span>  ${element.type === "Running" ? "spm" : "m"}</p>
+        <span></span>
+          </div>
+          </div>
+    
+           `;
+    form.insertAdjacentHTML("afterend", html);
+    const marker = L.marker([element.lat, element.lng]).addTo(map);
+    marker
+      .bindPopup(
+        `<h3 class="run-marker">${element.type} on ${new Date().toLocaleString(
+          navigator.language,
+          {
+            month: "long",
+            day: "2-digit",
+          }
+        )}</h3>`
+      )
+      .openPopup();
+  }
+} else {
+  var arr = [];
+}
 
 type.addEventListener("change", () => {
   if (type.value === "Cycling") {
@@ -92,8 +143,20 @@ form.addEventListener("keypress", (e) => {
         )}</h3>`
       )
       .openPopup();
-    //   document.querySelector(".leaflet-popup-content-wrapper").classList.add("popup-warper")
-    //   document.querySelector(".leaflet-popup-content").style.width="fit-content"
+
+    arr.push({
+      lat: lat,
+      lng: lng,
+      type: type.value,
+      distance: distance.value,
+      duration: duration.value,
+      cadence: cadence.value,
+    });
+    console.log(arr);
+    localStorage.setItem("arr", JSON.stringify(arr));
+
+    // localStorage.setItem("lngs",lngArr)
+
     form.classList.add("hidden");
   } else {
     alert("You should entre all fields with positive nember.");
@@ -102,11 +165,7 @@ form.addEventListener("keypress", (e) => {
 
 map.on("click", (e) => {
   form.classList.remove("hidden");
+
   lat = e.latlng.lat;
   lng = e.latlng.lng;
-  localStorage.setItem("x",`${e.latlng.lat}`)
-  localStorage.setItem("y",`${e.latlng.lat}`)
- 
 });
-
-
