@@ -24,7 +24,8 @@ body {
 }
 
 .display-section {
-  width: 650px;
+  width: 450px;
+  flex-shrink: 0;
   height: 80vh;
   background-color: var(--color-1);
   display: flex;
@@ -39,6 +40,7 @@ img {
 }
 form,
 .programme {
+  cursor: pointer;
   display: grid;
   grid-template-areas:
     "lt it ld id"
@@ -61,20 +63,23 @@ label {
 }
 input,
 select {
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   height: 2rem;
   width: 5rem;
   border: none;
   border-radius: 5px;
+  padding-left: 0.3rem;
 }
 .programme {
-  flex-grow: 1;
+  
   grid-template-areas:
     " h h h h"
     " t d dur c";
   column-gap: 0.2rem;
   row-gap: 0.5rem;
   color: var(--color-2);
+  border-left: 10px solid #00c56a;
+  
 }
 
 .programme :nth-child(1) {
@@ -83,7 +88,7 @@ select {
   font-weight: 400;
 }
 .programme p {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 .programme :nth-child(2) {
   grid-area: t;
@@ -99,33 +104,36 @@ select {
 }
 
 .hidden {
+  
   display: none;
+  
 }
 .map-section {
   width: 100%;
- 
+ flex-grow: 1;
   background-color: var(--color-3);
 }
 #map{
   height: 80vh;
 }
-.foo {
-  display: flex;
-}
+
 .work-run{
-  transform: translateX(50%);
-  margin-top: 1rem;
-  width: 1rem;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  background-color: var(--color-3)
+  border-left: 10px solid #00c56a;
 }
 .work-cycle{
-  transform: translateX(50%);
-  margin-top: 1rem;
-  width: 1rem;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  background-color: var(--color-4)
+  border-left:10px solid #ffb545;
+}
+.leaflet-popup-content-wrapper  {
+  background: var(--color-1);
+  color: white;
+  border-radius: 5px;
+  
+   
 }
 
+.leaflet-popup-tip{
+  background: var(--color-1);
+}
+h3{
+  font-weight: 100;
+}
